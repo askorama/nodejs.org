@@ -2,7 +2,7 @@
 
 import { OramaSearchBox, OramaSearchButton } from '@orama/react-components';
 import { useTheme } from 'next-themes';
-import { type FC } from 'react';
+import type { FC } from 'react';
 
 import {
   ORAMA_CLOUD_ENDPOINT,
