@@ -7,7 +7,11 @@ import { type FC } from 'react';
 import {
   ORAMA_CLOUD_ENDPOINT,
   ORAMA_CLOUD_API_KEY,
+  DEFAULT_ORAMA_QUERY_PARAMS,
+  BASE_URL,
 } from '@/next.constants.mjs';
+
+import { themeConfig } from './utils';
 
 const SearchButton: FC = () => {
   const { resolvedTheme } = useTheme();
@@ -15,30 +19,42 @@ const SearchButton: FC = () => {
 
   return (
     <>
-      <OramaSearchButton style={{ flexGrow: 1 }} colorScheme={colorScheme}>
+      <OramaSearchButton
+        style={{ flexGrow: 1 }}
+        colorScheme={colorScheme}
+        themeConfig={themeConfig}
+      >
         Search
       </OramaSearchButton>
 
       <OramaSearchBox
-        colorScheme={colorScheme}
         index={{ api_key: ORAMA_CLOUD_API_KEY, endpoint: ORAMA_CLOUD_ENDPOINT }}
+        colorScheme={colorScheme}
+        themeConfig={themeConfig}
         facetProperty="siteSection"
-        resultMap={{
-          title: 'pageTitle',
-          description: 'pageSectionContent',
-          section: 'siteSection',
-          path: 'path',
-        }}
+        sourceBaseUrl={BASE_URL}
         sourcesMap={{
-          title: 'pageTitle',
-          description: 'path',
-          path: 'path',
+          title: 'pageSectionTitle',
+          description: 'formattedPath',
+          path: 'pageLink',
         }}
-        sourceBaseUrl="/en/"
+        resultMap={{
+          title: 'pageSectionTitle',
+          description: 'formattedPath',
+          section: 'siteSection',
+          path: 'pageLink',
+        }}
+        highlight={{
+          caseSensitive: false,
+          HTMLTag: 'b',
+          CSSClass: 'font-bold',
+        }}
+        searchParams={DEFAULT_ORAMA_QUERY_PARAMS}
+        linksTarget="_self"
         suggestions={[
-          'How to install Node.js',
-          'Creating a npm package',
-          'Upgrading Node.js',
+          'How to install Node.js?',
+          'How to create an HTTP server?',
+          'Upgrading Node.js version',
         ]}
       />
     </>
