@@ -143,6 +143,15 @@ export const DEFAULT_ORAMA_QUERY_PARAMS = {
 };
 
 /**
+ * The initial Orama Cloud chat suggestions visible in the empty state of the search box.
+ */
+export const DEFAULT_ORAMA_SUGGESTIONS = [
+  'How to install Node.js?',
+  'How to create an HTTP server?',
+  'Upgrading Node.js version',
+];
+
+/**
  * The default batch size to use when syncing Orama Cloud
  */
 export const ORAMA_SYNC_BATCH_SIZE = 50;

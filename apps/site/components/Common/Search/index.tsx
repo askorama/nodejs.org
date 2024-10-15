@@ -8,6 +8,7 @@ import {
   ORAMA_CLOUD_ENDPOINT,
   ORAMA_CLOUD_API_KEY,
   DEFAULT_ORAMA_QUERY_PARAMS,
+  DEFAULT_ORAMA_SUGGESTIONS,
   BASE_URL,
 } from '@/next.constants.mjs';
 
@@ -31,7 +32,6 @@ const SearchButton: FC = () => {
         index={{ api_key: ORAMA_CLOUD_API_KEY, endpoint: ORAMA_CLOUD_ENDPOINT }}
         colorScheme={colorScheme}
         themeConfig={themeConfig}
-        facetProperty="siteSection"
         sourceBaseUrl={BASE_URL}
         sourcesMap={{
           title: 'pageSectionTitle',
@@ -44,18 +44,15 @@ const SearchButton: FC = () => {
           section: 'siteSection',
           path: 'pageLink',
         }}
+        facetProperty="siteSection"
+        linksTarget="_self"
         highlight={{
           caseSensitive: false,
           HTMLTag: 'b',
           CSSClass: 'font-bold',
         }}
         searchParams={DEFAULT_ORAMA_QUERY_PARAMS}
-        linksTarget="_self"
-        suggestions={[
-          'How to install Node.js?',
-          'How to create an HTTP server?',
-          'Upgrading Node.js version',
-        ]}
+        suggestions={DEFAULT_ORAMA_SUGGESTIONS}
       />
     </>
   );
