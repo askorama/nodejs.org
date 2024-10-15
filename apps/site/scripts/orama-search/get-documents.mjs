@@ -79,7 +79,7 @@ export const siteContent = [...pageData, ...apiData]
     const siteSection = pathname.split('/').shift();
     const subSections = splitIntoSections(markdownContent);
     return subSections.map(section => {
-      const path = pathname + '#' + slug(section.pageSectionTitle);
+      const path = `${pathname}#${slug(section.pageSectionTitle)}`;
 
       return {
         path,
