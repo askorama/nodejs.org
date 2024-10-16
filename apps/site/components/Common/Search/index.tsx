@@ -1,8 +1,9 @@
 'use client';
 
 import { OramaSearchBox, OramaSearchButton } from '@orama/react-components';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import type { FC } from 'react';
+import { type FC } from 'react';
 
 import {
   ORAMA_CLOUD_ENDPOINT,
@@ -16,7 +17,14 @@ import { themeConfig } from './utils';
 
 const SearchButton: FC = () => {
   const { resolvedTheme } = useTheme();
+  const t = useTranslations();
   const colorScheme = resolvedTheme as 'light' | 'dark';
+
+  const sourceMap = {
+    title: 'pageSectionTitle',
+    description: 'formattedPath',
+    path: 'pageLink',
+  };
 
   return (
     <>
@@ -24,8 +32,9 @@ const SearchButton: FC = () => {
         style={{ flexGrow: 1 }}
         colorScheme={colorScheme}
         themeConfig={themeConfig}
+        aria-label={t('components.search.searchBox.placeholder')}
       >
-        Search
+        {t('components.search.searchBox.placeholder')}
       </OramaSearchButton>
 
       <OramaSearchBox
@@ -33,16 +42,10 @@ const SearchButton: FC = () => {
         colorScheme={colorScheme}
         themeConfig={themeConfig}
         sourceBaseUrl={BASE_URL}
-        sourcesMap={{
-          title: 'pageSectionTitle',
-          description: 'formattedPath',
-          path: 'pageLink',
-        }}
+        sourcesMap={sourceMap}
         resultMap={{
-          title: 'pageSectionTitle',
-          description: 'formattedPath',
+          ...sourceMap,
           section: 'siteSection',
-          path: 'pageLink',
         }}
         facetProperty="siteSection"
         linksTarget="_self"
